@@ -15,7 +15,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, InsertScoresActivity.class));
+        Intent intent = new Intent(this, PracticeActivity.class);
+        Practice practice = MemoryStorage.getInstance().startNewPracticeRound();
+        intent.putExtra("practice_id", practice.getId());
+        startActivity(intent);
         finish();
     }
 

@@ -16,6 +16,7 @@ public class InsertScoresActivity extends Activity {
     private Score[] scores;
     private TextView finalScore;
     private Button submitBtn;
+    private Practice practice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +24,33 @@ public class InsertScoresActivity extends Activity {
 
         setContentView(R.layout.activity_insert);
 
+        long practiceId = getIntent().getLongExtra("practice_id", -1L);
+        if (practiceId > 0) {
+            practice = MemoryStorage.getInstance().getPracticeRound(practiceId);
+        }
+
+        if (practice == null) {
+            practice = MemoryStorage.getInstance().startNewPracticeRound();
+        }
+
         arrow = 0;
         arrows = new int[] {R.id.arrow1, R.id.arrow2, R.id.arrow3, R.id.arrow4, R.id.arrow5, R.id.arrow6 };
         scores = new Score[arrows.length];
 
         finalScore = (TextView) findViewById(R.id.finalScore);
         submitBtn = (Button) findViewById(R.id.submit);
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Check all the scores
+                for (int i = 0; i < scores.length; i++) {
+                    if (scores[i] == null) {
+                        return;
+                    }
+                }
+            }
+        });
 
         setupButton(R.id.scoreX, Score.X);
         setupButton(R.id.score10, Score.Ten);
