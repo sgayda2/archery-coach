@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".PracticeActivity">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/newPracticeBtn"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:text="Start New Practice"/>
+
+        <Button
+                android:id="@+id/lastPracticeBtn"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:text="Continue Last Practice"/>
+
+        <Button
+                android:id="@+id/prevPracticeBtn"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:text="Continue Previous Practice"/>
+
+        <Button
+                android:id="@+id/showStats"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:text="See Stats"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

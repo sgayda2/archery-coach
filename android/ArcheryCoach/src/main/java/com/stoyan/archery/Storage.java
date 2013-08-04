@@ -11,8 +11,13 @@ public interface Storage {
 
     public Practice getPracticeRound(long id);
 
+    /**
+     * @return the practice object that was created last
+     */
+    public Practice getLastPracticeRound();
+
     public List<Score[]> getScores(Practice practice);
 
-    public boolean store(Practice practice, Score[] arrows);
+    public boolean appendScores(Practice practice, Score[] arrows);
 
 }

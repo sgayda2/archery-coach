@@ -51,7 +51,8 @@ public class InsertScoresActivity extends Activity {
                     }
                 }
 
-                if(MemoryStorage.getInstance().store(practice, scores)) {
+                if(MemoryStorage.getInstance().appendScores(practice, scores)) {
+                    // Add option to stay on this screen
                     finish();
                 } else {
                     Toast.makeText(InsertScoresActivity.this, "Error Saving", Toast.LENGTH_LONG).show();

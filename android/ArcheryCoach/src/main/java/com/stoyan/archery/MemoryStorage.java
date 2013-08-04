@@ -13,6 +13,7 @@ public class MemoryStorage implements Storage {
 
     private HashMap<Practice, ArrayList<Score[]>> scores;
     private HashMap<Long, Practice> practices;
+    private Practice lastPractice;
 
     public MemoryStorage() {
         scores = new HashMap<Practice, ArrayList<Score[]>>();
@@ -34,6 +35,7 @@ public class MemoryStorage implements Storage {
         ret = new Practice(id);
         practices.put(id, ret);
 
+        lastPractice = ret;
         return ret;
     }
 
@@ -49,12 +51,17 @@ public class MemoryStorage implements Storage {
     }
 
     @Override
+    public Practice getLastPracticeRound() {
+        return lastPractice;
+    }
+
+    @Override
     public List<Score[]> getScores(Practice practice) {
         return scores.get(practice);
     }
 
     @Override
-    public boolean store(Practice practice, Score[] arrows) {
+    public boolean appendScores(Practice practice, Score[] arrows) {
         if (practice == null || arrows == null || arrows.length == 0) {
             return false;
         }
