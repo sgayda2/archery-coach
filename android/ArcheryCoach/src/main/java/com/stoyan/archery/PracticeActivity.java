@@ -45,7 +45,9 @@ public class PracticeActivity extends Activity {
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(PracticeActivity.this, ShowScoresActivity.class));
+                Intent intent = new Intent(PracticeActivity.this, ShowPracticeActivity.class);
+                intent.putExtra("practice_id", practice.getId());
+                startActivity(intent);
             }
         });
     }
