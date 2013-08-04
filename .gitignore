@@ -23,7 +23,7 @@ local.properties
 .idea/
 .gradle
 /*/out
-/*/build
+build
 /*/*/production
 *.iml
 *.iws

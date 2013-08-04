@@ -25,10 +25,14 @@ public class MemoryStorage implements Storage {
 
     @Override
     public synchronized Practice startNewPracticeRound() {
-        Practice ret = practices.get(nextId());
+        long id = nextId();
+        Practice ret = practices.get(id);
         if (ret != null) {
             return startNewPracticeRound();
         }
+
+        ret = new Practice(id);
+        practices.put(id, ret);
 
         return ret;
     }
