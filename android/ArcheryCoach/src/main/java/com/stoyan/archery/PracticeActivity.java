@@ -4,7 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Stoyan Gaydarov on 8/3/13.
@@ -13,7 +20,7 @@ public class PracticeActivity extends Activity {
 
     private Practice practice;
     private Button insertBtn;
-    private Button showBtn;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +38,6 @@ public class PracticeActivity extends Activity {
         }
 
         insertBtn = (Button) findViewById(R.id.insertButton);
-        showBtn = (Button) findViewById(R.id.showButton);
-
         insertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,13 +47,15 @@ public class PracticeActivity extends Activity {
             }
         });
 
-        showBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PracticeActivity.this, ShowPracticeActivity.class);
-                intent.putExtra("practice_id", practice.getId());
-                startActivity(intent);
-            }
-        });
+        list = (ListView) findViewById(R.id.scoreList);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        List<Score[]> values = MemoryStorage.getInstance().getScores(practice);
+        ScoreListAdapter adapter = new ScoreListAdapter(this, Round.toRound(values));
+        list.setAdapter(adapter);
     }
 }

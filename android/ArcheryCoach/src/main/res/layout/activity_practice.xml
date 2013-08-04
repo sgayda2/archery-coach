@@ -4,27 +4,24 @@
                 android:layout_height="match_parent"
                 tools:context=".PracticeActivity">
 
-    <LinearLayout
+    <ListView
+            android:id="@+id/scoreList"
+            android:layout_above="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    <LinearLayout android:id="@+id/bottomBar"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+                  android:layout_margin="5dp" >
+
+        <Button
+            android:id="@+id/insertButton"
             android:layout_width="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-        <Button
-                android:id="@+id/insertButton"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_height="wrap_content"
-                android:text="Insert New Round"/>
-
-        <Button
-                android:id="@+id/showButton"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:layout_height="wrap_content"
-                android:text="Show Rounds"/>
+            android:layout_height="wrap_content"
+            android:text="Insert New Round" />
 
     </LinearLayout>
 
