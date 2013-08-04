@@ -1,6 +1,7 @@
 package com.stoyan.archery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -73,6 +74,11 @@ public class MemoryStorage implements Storage {
         }
 
         return target.add(arrows);
+    }
+
+    @Override
+    public Collection<Practice> getAllPractices() {
+        return practices.values();
     }
 
     private static MemoryStorage instance;

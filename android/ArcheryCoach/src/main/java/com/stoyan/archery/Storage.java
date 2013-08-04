@@ -1,5 +1,6 @@
 package com.stoyan.archery;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public interface Storage {
 
     public boolean appendScores(Practice practice, Score[] arrows);
 
+    public Collection<Practice> getAllPractices();
 }

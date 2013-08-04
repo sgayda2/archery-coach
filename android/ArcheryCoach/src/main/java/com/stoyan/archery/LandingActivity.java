@@ -30,7 +30,7 @@ public class LandingActivity extends Activity {
         prevPracticeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //List activity to select previous practice
+                startActivity(new Intent(LandingActivity.this, PracticeListActivity.class));
             }
         });
 
