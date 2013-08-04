@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Stoyan Gaydarov on 8/2/13.
@@ -48,6 +49,12 @@ public class InsertScoresActivity extends Activity {
                     if (scores[i] == null) {
                         return;
                     }
+                }
+
+                if(MemoryStorage.getInstance().store(practice, scores)) {
+                    finish();
+                } else {
+                    Toast.makeText(InsertScoresActivity.this, "Error Saving", Toast.LENGTH_LONG).show();
                 }
             }
         });
