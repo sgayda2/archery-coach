@@ -44,4 +44,17 @@ public class Round {
         }
         return rounds;
     }
+
+    public int getTotal() {
+        if (scores == null) {
+            return 0;
+        }
+
+        int count = 0;
+        for (Score score : scores) {
+            count += score.points;
+        }
+
+        return count;
+    }
 }

@@ -2,6 +2,7 @@ package com.stoyan.archery;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,7 +59,8 @@ public class MemoryStorage implements Storage {
 
     @Override
     public List<Score[]> getScores(Practice practice) {
-        return scores.get(practice);
+        List<Score[]> values = scores.get(practice);
+        return values == null ? Collections.<Score[]>emptyList() : new ArrayList<Score[]>(values);
     }
 
     @Override

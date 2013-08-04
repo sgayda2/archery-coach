@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,6 +23,7 @@ public class PracticeActivity extends Activity {
     private Practice practice;
     private Button insertBtn;
     private ListView list;
+    private TextView lastFive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class PracticeActivity extends Activity {
             practice = MemoryStorage.getInstance().startNewPracticeRound();
         }
 
+        lastFive = (TextView) findViewById(R.id.lastFive);
         insertBtn = (Button) findViewById(R.id.insertButton);
         insertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +58,22 @@ public class PracticeActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
+        // Grab the values from storage
         List<Score[]> values = MemoryStorage.getInstance().getScores(practice);
+
+        // Most recent at the top
+        Collections.reverse(values);
+
+        // Create the adapter
         ScoreListAdapter adapter = new ScoreListAdapter(this, Round.toRound(values));
         list.setAdapter(adapter);
+
+        int count = 0;
+        for (int i = 0; i < 5 && i < adapter.getCount(); i++) {
+            Round r = adapter.getItem(i);
+            count += r.getTotal();
+        }
+
+        lastFive.setText("Last 5: " + String.valueOf(count));
     }
 }
