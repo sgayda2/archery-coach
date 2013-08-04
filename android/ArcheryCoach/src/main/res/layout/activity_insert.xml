@@ -192,14 +192,29 @@
                     />
         </LinearLayout>
 
-        <Button
-                android:id="@+id/submit"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                />
+        <LinearLayout android:layout_gravity="right"
+                      android:layout_marginTop="10dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" >
+
+            <CheckBox android:id="@+id/continueInsert"
+                      android:layout_width="wrap_content"
+                      android:text="Insert More"
+                      android:checked="true"
+                      android:layout_gravity="center_vertical"
+                      android:layout_height="wrap_content" />
+
+            <Button
+                    android:id="@+id/submit"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

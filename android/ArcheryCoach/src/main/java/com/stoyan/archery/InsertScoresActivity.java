@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,12 +13,13 @@ import android.widget.Toast;
  */
 public class InsertScoresActivity extends Activity {
 
-    private int arrow;
-    private int[] arrows;
+    private int arrowIndex;
+    private TextView[] arrowViews;
     private Score[] scores;
     private TextView finalScore;
     private Button submitBtn;
     private Practice practice;
+    private CheckBox continueInsert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,16 @@ public class InsertScoresActivity extends Activity {
             practice = MemoryStorage.getInstance().startNewPracticeRound();
         }
 
-        arrow = 0;
-        arrows = new int[] {R.id.arrow1, R.id.arrow2, R.id.arrow3, R.id.arrow4, R.id.arrow5, R.id.arrow6 };
-        scores = new Score[arrows.length];
+        arrowIndex = 0;
+        int[] arrowRes = new int[]{R.id.arrow1, R.id.arrow2, R.id.arrow3, R.id.arrow4, R.id.arrow5, R.id.arrow6 };
+        arrowViews = new TextView[arrowRes.length];
 
+        scores = new Score[arrowRes.length];
+        for (int i = 0; i < arrowRes.length; i++) {
+            arrowViews[i] = (TextView) findViewById(arrowRes[i]);
+        }
+
+        continueInsert = (CheckBox) findViewById(R.id.continueInsert);
         finalScore = (TextView) findViewById(R.id.finalScore);
         submitBtn = (Button) findViewById(R.id.submit);
 
@@ -52,8 +60,19 @@ public class InsertScoresActivity extends Activity {
                 }
 
                 if(MemoryStorage.getInstance().appendScores(practice, scores)) {
-                    // Add option to stay on this screen
-                    finish();
+                    if (!continueInsert.isChecked()) {
+                        // If we are done inserting then finish
+                        finish();
+                    } else {
+                        // Otherwise reset the values
+                        scores = new Score[arrowViews.length];
+                        finalScore.setText("---");
+                        arrowIndex = 0;
+
+                        for (TextView view : arrowViews) {
+                            view.setText("---");
+                        }
+                    }
                 } else {
                     Toast.makeText(InsertScoresActivity.this, "Error Saving", Toast.LENGTH_LONG).show();
                 }
@@ -85,13 +104,13 @@ public class InsertScoresActivity extends Activity {
     }
 
     public void onClickScore(Score score) {
-        arrow = arrow % arrows.length;
+        arrowIndex = arrowIndex % arrowViews.length;
 
-        TextView view = (TextView) findViewById(arrows[arrow]);
+        TextView view = arrowViews[arrowIndex];
         view.setText(score.display);
-        scores[arrow] = score;
+        scores[arrowIndex] = score;
 
-        arrow++;
+        arrowIndex++;
 
         int value = 0;
         for (int i = 0; i < scores.length; i++) {
