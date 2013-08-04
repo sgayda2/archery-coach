@@ -19,7 +19,18 @@ public class Round {
 
     @Override
     public String toString() {
-        return Arrays.toString(scores);
+        StringBuilder builder = new StringBuilder();
+        int count = 0;
+        for (Score score : scores) {
+            builder.append(score.display);
+            builder.append(" ");
+            count += score.points;
+        }
+
+        builder.append("=> ");
+        builder.append(count);
+
+        return builder.toString();
     }
 
     public static List<Round> toRound(List<Score[]> scores) {

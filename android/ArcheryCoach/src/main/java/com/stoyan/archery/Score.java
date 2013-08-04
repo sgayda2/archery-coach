@@ -4,7 +4,7 @@ package com.stoyan.archery;
  * Created by Stoyan Gaydarov on 7/31/13.
  */
 public enum Score {
-    Miss(0, "0"),
+    Miss(0, "M"),
     One(1, "1"),
     Two(2, "2"),
     Three(3, "3"),
